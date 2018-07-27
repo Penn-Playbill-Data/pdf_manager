@@ -5,8 +5,14 @@ from datetime import datetime
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
+# def datetime_format(): - Finish
+# now = datetime.now()
+# return {}
+
 def pdf_splitter(path):
     fname = os.path.splitext(os.path.basename(path))[0]
+    fname = fname.split()
+    fname = "_".join(fname)
     files = []
     pdf = PdfFileReader(path)
     for page in range(pdf.getNumPages()):
@@ -25,6 +31,8 @@ def pdf_splitter(path):
     folder_path = os.path.dirname(os.path.abspath(path))
     folder_path += "/" + fname
     if os.path.isdir(folder_path):
+        # Remove forward slash - helper function
+        # Year 4d - Month 2d - Date 2d - Hour - Minute - Second
         folder_path = folder_path + str(datetime.now())
     os.mkdir(folder_path)
 
